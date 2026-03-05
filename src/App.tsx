@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={lightTheme}>
       <GlobalStyles />
-        <BrowserRouter>
+        <BrowserRouter basename="/kode-intership-2025-react">
           <Routes>
             <Route path="/" element={< MainPage />} />
             <Route path="/user/:id" element={<UserDetailPage />} />

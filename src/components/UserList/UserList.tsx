@@ -24,8 +24,7 @@ export const UserList: React.FC<UserListProps> = ({
         textAlign: 'center', 
         padding: '40px 16px',
         color: '#97979B',
-        fontSize: '16px',
-        // height: 'calc(100vh - 140px)' 
+        fontSize: '16px', 
       }}>
         {searchQuery ? <NotFound /> : "Нет пользователей"}
       </div>

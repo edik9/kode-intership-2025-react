@@ -13,6 +13,7 @@ const pulse = keyframes`
   }
 `
 export const SkeletonWrapper = styled.div`
+  overflow: hidden;
   padding: 12px 16px;
   border-bottom: 1px solid ${colors.bgPrimary};
   display: flex;

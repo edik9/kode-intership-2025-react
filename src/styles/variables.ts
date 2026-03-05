@@ -1,12 +1,14 @@
 // точки перехода для адаптива
 export const breakpoints = {
   mobile: 430,
+  tablet: 768,
   desktop: 1024
 } as const
 
 // медиа-запросы для использования в компонентах
 export const media = {
   mobile: `@media (max-width: ${breakpoints.mobile}px)`,
+  tablet: `@media (min-width: ${breakpoints.mobile + 1}px) and (max-width: ${breakpoints.desktop - 1}px)`,
   desktop: `@media (min-width: ${breakpoints.desktop}px)`,
 }
 

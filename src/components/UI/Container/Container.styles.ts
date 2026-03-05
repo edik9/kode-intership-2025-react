@@ -3,12 +3,17 @@ import { media } from "../../../styles/variables";
 
 export const Container = styled.div`
   width: 100%;
+  min-width: 320px;
   max-width: 375px; 
   margin: 0 auto;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
 
+  ${media.tablet} {        
+    max-width: 768px;      
+  }
+
   ${media.desktop} {
-    max-width: 1024px;
+    max-width: 1280px;
   }
 `

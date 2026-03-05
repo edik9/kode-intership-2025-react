@@ -128,7 +128,8 @@ const MainPage = () => {
     return usersToFilter.filter(user => 
       user.firstName.toLowerCase().includes(lowerQuery) ||
       user.lastName.toLowerCase().includes(lowerQuery) ||
-      user.userTag.toLowerCase().includes(lowerQuery)
+      user.userTag.toLowerCase().includes(lowerQuery) ||
+      user.phone.toLowerCase().includes(lowerQuery)
     )
   }
 

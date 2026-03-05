@@ -36,7 +36,7 @@ export const SkeletonList: React.FC<SkeletonProps> = ({variant = 'list'}) => {
   return (
     <div style={{ overflow: 'hidden' }}>
       {Array.from({length: 5}).map((_, index) => (
-        <SkeletonCard key={index}/>
+        <SkeletonCard key={index} variant="list"/>
       ))}
     </div>
   )

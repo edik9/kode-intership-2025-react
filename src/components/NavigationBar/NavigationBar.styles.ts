@@ -11,6 +11,7 @@ export const Header = styled.header<HeaderProps>`
   width: 100%;
   background: ${props => props.$isDetailPage ? colors.bgSecondary : colors.bgPrimary}; 
   border-bottom: ${props => props.$isDetailPage ? 'none' : `1px solid ${colors.contentDefaultSecondary}`}
+  z-index: 1000;
 `
 
 

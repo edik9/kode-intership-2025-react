@@ -49,4 +49,39 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
   .no-transition * {
     transition: none !important;
   }
+    html, body {
+    overscroll-behavior: none; 
+    height: 100%;
+    overflow: hidden; 
+  }
+
+  #root {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: contain; 
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.bgSecondary};
+    border-radius: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.contentDefaultPrimary};
+    border-radius: 10px;
+    transition: background 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.colors.active};
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 `

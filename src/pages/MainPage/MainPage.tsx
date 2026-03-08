@@ -9,6 +9,7 @@ import { UserList } from '../../components/UserList/UserList'
 import { SortModal } from '../../components/SortModal/SortModal'
 import { SkeletonList } from '../../components/UI/Skeleton/Skeleton'
 import { useNetworkStatus } from '../../hooks/useNetworkStatus.ts'
+import useLocalStorageState from 'use-local-storage-state'
 
 type SortType = "alphabet" | "birthday"
 
@@ -18,9 +19,18 @@ const MainPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   
-  const [selectedDepartment, setSelectedDepartment] = useState<Department>("all")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [sortType, setSortType] = useState<SortType>("alphabet")
+  const [selectedDepartment, setSelectedDepartment] = useLocalStorageState<Department>('department', {
+    defaultValue: 'all'
+  });
+
+  const [searchQuery, setSearchQuery] = useLocalStorageState<string>('search', {
+    defaultValue: ''
+  });
+
+  const [sortType, setSortType] = useLocalStorageState<SortType>('sort', {
+    defaultValue: 'alphabet'
+  });
+  
   const debouncedSearch = useDebounce(searchQuery, 500)
 
   const [isSortModalOpen, setIsSortModalOpen] = useState(false)

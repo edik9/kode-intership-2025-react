@@ -55,7 +55,7 @@ useEffect(() => {
     setLoading(true)
     try {
       const users = await getUsers("all")
-      const foundUser = users.find(u => u.id === id)
+      const foundUser = users.find((u: User) => u.id === id)
       setUser(foundUser || null)
     } catch (error) {
       console.error("NO", error)

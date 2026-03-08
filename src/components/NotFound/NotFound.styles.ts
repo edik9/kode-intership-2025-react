@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import { typography } from "../../styles/variables";
 
 export const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const Title = styled.h3`
   font-weight: ${typography.fontWeight.semibold};
   font-size: ${typography.fontSize.xl}px;
   line-height: ${typography.lineHeight.lg};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   margin: 0 0 8px 0;
 `
 
@@ -30,6 +30,6 @@ export const Description = styled.p`
   font-weight: ${typography.fontWeight.regular};
   font-size: ${typography.fontSize.lg}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.textTertiary};
+  color: ${({theme}) => theme.colors.textTertiary};
   margin: 0;
 `

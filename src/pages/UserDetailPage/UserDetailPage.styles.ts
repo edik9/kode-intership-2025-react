@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import { typography } from "../../styles/variables";
 
 export const InfoSection = styled.div`
   margin: auto 0;
@@ -19,7 +19,7 @@ export const InfoRow = styled.div`
     left: 16px;  
     right: 16px;
     height: 1px;
-    background-color: ${colors.bgSecondary};
+    background-color: ${({theme}) => theme.colors.bgSecondary};
   }
   
   &:last-child::after {
@@ -29,10 +29,16 @@ export const InfoRow = styled.div`
 
 export const Icon = styled.span`
   font-size: 20px;
-  color: ${colors.textTertiary};
   display: flex;
   align-items: center;
   justify-content: start;
+
+  img {
+    filter: ${({ theme }) => 
+      theme.colors.textPrimary === '#ffffff'
+        ? 'brightness(0) invert(1)' 
+        : 'none'}
+  }
 `
 
 export const InfoContent = styled.div`
@@ -47,7 +53,7 @@ export const InfoText = styled.span`
   font-weight: ${typography.fontWeight.medium};
   font-size: ${typography.fontSize.lg}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
 `
 
 export const AgeText = styled.span`
@@ -55,5 +61,5 @@ export const AgeText = styled.span`
   font-weight: ${typography.fontWeight.regular};
   font-size: ${typography.fontSize.md}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.textTertiary};
+  color: ${({theme}) => theme.colors.textTertiary};
 `

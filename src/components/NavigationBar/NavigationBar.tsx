@@ -1,4 +1,5 @@
 import { BackIcon, SearchIcon, SortIcon } from "../../assets/icons"
+import { useTheme } from "../../hooks/useTheme"
 import type { Department } from "../../types/user"
 import OfflineBanner from "../OfflineBanner/OfflineBanner"
 import ReconnectedBanner from "../ReconnectedBanner/ReconnectedBanner"
@@ -29,6 +30,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   isOffline,
   isReconnecting
 }) => {
+  const {theme, toggleTheme} = useTheme()
   return (
     <>
       {isOffline ? (
@@ -79,7 +81,14 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
             ) : (
               <Styles.MainHeader>
                 <Styles.SearchSection>
-                  <Styles.SearchLabel>Поиск</Styles.SearchLabel>
+                  <Styles.OptButtons>
+                    <Styles.SearchLabel>
+                      Поиск
+                    </Styles.SearchLabel>
+                    <Styles.ThemeToggle onClick={toggleTheme}>
+                      {theme === 'light' ? '🌙' : '☀️'}
+                    </Styles.ThemeToggle>
+                  </Styles.OptButtons>
                   <Styles.SearchWrapper>
                     {/* ПОИСКОВАЯ СТРОКА */}
                     <Styles.SearchContainer>

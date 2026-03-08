@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import { typography } from "../../styles/variables";
 
 export const Container = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Line = styled.div`
   flex: 1;
   height: 1px;
-  background-color: ${colors.contentDefaultSecondary};
+  background-color: ${({theme}) => theme.colors.contentDefaultSecondary};
   &:first-child {
     margin-right: 60px;
   }
@@ -24,6 +24,6 @@ export const Year = styled.span`
   font-weight: ${typography.fontWeight.regular};
   font-size: ${typography.fontSize.md}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.contentDefaultSecondary};
+  color: ${({theme}) => theme.colors.contentDefaultSecondary};
   white-space: nowrap;
 `

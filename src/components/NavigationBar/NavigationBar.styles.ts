@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import { typography } from "../../styles/variables";
 
 interface HeaderProps {
   $isDetailPage?: boolean;
@@ -9,8 +9,8 @@ export const Header = styled.header<HeaderProps>`
   position: sticky;       
   top: 0;
   width: 100%;
-  background: ${props => props.$isDetailPage ? colors.bgSecondary : colors.bgPrimary}; 
-  border-bottom: ${props => props.$isDetailPage ? 'none' : `1px solid ${colors.contentDefaultSecondary}`}
+  background: ${props => props.$isDetailPage ? props.theme.colors.bgSecondary : props.theme.colors.bgPrimary}; 
+  border-bottom: ${props => props.$isDetailPage ? 'none' : `1px solid ${props.theme.colors.contentDefaultSecondary}`}
   z-index: 1000;
 `
 
@@ -36,12 +36,17 @@ export const BackButton = styled.button`
   font-size: 28px;
   cursor: pointer;
   padding: 8px;
-  color: ${colors.textPrimary};
   display: flex;
   align-items: center;
   justify-content: center;
 
-  
+  img {
+    filter: ${({ theme }) => 
+      theme.colors.textPrimary === '#ffffff'
+        ? 'brightness(0) invert(1)' 
+        : 'none'}
+  }
+
   &:hover {
     opacity: 0.7;
   }
@@ -52,7 +57,7 @@ export const PageTitle = styled.h1`
   font-weight: ${typography.fontWeight.bold};
   font-size: ${typography.fontSize.xxxl}px;
   line-height: ${typography.lineHeight.xxl};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   margin: 0;
   position: absolute;
   left: 50%;
@@ -79,7 +84,7 @@ export const SearchLabel = styled.p`
   font-weight: ${typography.fontWeight.bold};
   font-size: ${typography.fontSize.xxxl}px;
   line-height: ${typography.lineHeight.xxl};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   margin: 0 0 24px 0;
 `
 
@@ -95,7 +100,7 @@ export const SearchIcon = styled.div`
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: ${colors.textTertiary};
+  color: ${({theme}) => theme.colors.textTertiary};
   z-index: 1;
   display: flex;
   align-items: center;
@@ -119,23 +124,29 @@ export const SearchContainer = styled.div`
     }
   }
   input {
-    caret-color: ${colors.active};
+    caret-color: ${({theme}) => theme.colors.active};
   }
+`
+
+export const OptButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const SearchInput = styled.input`
   width: 100%;
   height: 40px;
   padding: 8px 44px 8px 44px;
-  background: ${colors.bgSecondary};
+  background: ${({theme}) => theme.colors.bgSecondary};
   border: none;
   border-radius: 16px;
   font-family: ${typography.fontFamily.primary};
   font-size: ${typography.fontSize.md}px;
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   
   &::placeholder {
-    color: ${colors.textTertiary};
+    color: ${({theme}) => theme.colors.textTertiary};
   }
 `
 
@@ -153,7 +164,7 @@ export const SortButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   z-index: 2;
   padding: 0;
 
@@ -186,14 +197,27 @@ export const Tab = styled.button<TabProps>`
   font-family: ${typography.fontFamily.primary};
   font-size: ${typography.fontSize.md}px;
   font-weight: ${props => props.$active ? typography.fontWeight.semibold : typography.fontWeight.regular};
-  color: ${props => props.$active ? colors.textPrimary : colors.textTertiary};
-  border-bottom: 2px solid ${props => props.$active ? colors.active : 'transparent'};
+  color: ${props => props.$active ? props.theme.colors.textPrimary : props.theme.colors.textTertiary};
+  border-bottom: 2px solid ${props => props.$active ? props.theme.colors.active : 'transparent'};
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.3s ease-in-out;
   
   &:hover {
-    color: ${colors.textPrimary};
+    color: ${({theme}) => theme.colors.textPrimary};
   }
 `
+export const ThemeToggle = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  margin-bottom: 24px;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 

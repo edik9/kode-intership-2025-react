@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import { typography } from "../../styles/variables";
 
 export const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const Title = styled.h3`
   font-weight: ${typography.fontWeight.semibold};
   font-size: ${typography.fontSize.xl}px;
   line-height: ${typography.lineHeight.lg};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   margin: 0 0 10px 0;
 `
 
@@ -30,7 +30,7 @@ export const Description = styled.p`
   font-weight: ${typography.fontWeight.regular};
   font-size: ${typography.fontSize.lg}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.textTertiary};
+  color: ${({theme}) => theme.colors.textTertiary};
   margin: 0 0 10px 0;
   max-width: 280px;
 `
@@ -40,10 +40,10 @@ export const RetryButton = styled.a`
   font-weight: ${typography.fontWeight.semibold};
   font-size: ${typography.fontSize.lg}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.active};
+  color: ${({theme}) => theme.colors.active};
   border: none;
   cursor: pointer;
-  background-color: ${colors.bgPrimary};
+  background-color: ${({theme}) => theme.colors.bgPrimary};
   transition: opacity 0.2s ease-in-out;
 
   &:hover {

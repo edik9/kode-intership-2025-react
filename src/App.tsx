@@ -1,16 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MainPage from "./pages/MainPage/MainPage"
 import UserDetailPage from "./pages/UserDetailPage/UserDetailPage"
-import { ThemeProvider } from "styled-components"
-import { lightTheme } from "./styles/theme"
+import ThemeProvider  from "./context/ThemeProvider"
+import { ThemeProvider as StyledThemeProvider } from "styled-components"
+import { lightTheme, darkTheme } from "./styles/theme"
 import { GlobalStyles } from "./styles/global"
 import { Container } from "./components/UI/Container/Container"
+import { useTheme } from "./hooks/useTheme"
 
-
-function App() {
-
-  return (
-    <ThemeProvider theme={lightTheme}>
+const ThemeApp = () => {
+  const {theme} = useTheme()
+  const currentTheme = theme === "light" ? lightTheme : darkTheme
+  
+  return(
+    <StyledThemeProvider theme={currentTheme}>
       <GlobalStyles />
       <Container>
         <BrowserRouter basename="/kode-intership-2025-react">
@@ -20,6 +23,15 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Container>
+    </StyledThemeProvider>
+  )
+}
+
+function App() {
+
+  return (
+    <ThemeProvider>
+      <ThemeApp />
     </ThemeProvider>
   )
 }

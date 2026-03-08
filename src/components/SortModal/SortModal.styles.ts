@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoints, colors, typography } from "../../styles/variables";
+import { breakpoints, typography } from "../../styles/variables";
 
 
 export const Overlay = styled.div`
@@ -8,7 +8,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${colors.bgTransparent};
+  background-color: ${({theme}) => theme.colors.bgTransparent};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@ export const Overlay = styled.div`
 export const Modal = styled.div`
   width: 375px;
   height: 192px;
-  background-color: ${colors.bgPrimary};
+  background-color: ${({theme}) => theme.colors.bgPrimary};
   border-radius: 20px;
   padding: 24px;
   position: relative;
@@ -53,7 +53,7 @@ export const CloseButton = styled.button`
   height: 24px;
   padding: 7px;
   border-radius: 50%;
-  background-color: ${colors.bgSecondary};
+  background-color: ${({theme}) => theme.colors.bgSecondary};
   border: none;
   cursor: pointer;
   display: flex;
@@ -68,7 +68,7 @@ export const CloseButton = styled.button`
   }
 
   &:hover {
-    background-color: ${colors.contentDefaultSecondary};
+    background-color: ${({theme}) => theme.colors.contentDefaultSecondary};
     
     img {
       filter: invert(11%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(97%) contrast(103%); /* черный */
@@ -105,7 +105,7 @@ export const Title = styled.div`
   font-weight: ${typography.fontWeight.semibold};
   font-size: ${typography.fontSize.xxl}px;
   line-height: ${typography.lineHeight.xl};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
   text-align: center;
   margin: 0 0 24px 0;
 
@@ -139,8 +139,8 @@ export const CustomRadio = styled.span<{ checked: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid ${props => props.checked ? colors.active : colors.active};
-  background-color: ${props => props.checked ? colors.active : 'transparent'};
+  border: 2px solid ${props => props.checked ? props.theme.colors.active : props.theme.colors.active};
+  background-color: ${props => props.checked ? props.theme.colors.active : 'transparent'};
   position: relative;
   transition: all 0.2s ease;
   
@@ -163,5 +163,5 @@ export const OptionText = styled.span`
   font-weight: ${typography.fontWeight.medium};
   font-size: ${typography.fontSize.lg}px;
   line-height: ${typography.lineHeight.md};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
 `

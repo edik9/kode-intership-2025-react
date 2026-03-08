@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, typography } from "../../styles/variables";
+import {typography } from "../../styles/variables";
 
 interface StyledProps {
   variant?: 'list' | 'detail';
@@ -13,10 +13,10 @@ export const Card = styled.div<StyledProps>`
   align-items: center;
   gap: ${props => props.variant === 'detail' ? '24px' : '12px'};
   transition: background-color 0.3s ease-in-out;
-  background-color: ${props => props.variant === "detail" ? colors.bgSecondary : colors.bgPrimary};
+  background-color: ${props => props.variant === "detail" ? props.theme.colors.bgSecondary : props.theme.colors.bgPrimary};
 
   &:hover {
-    background-color: ${colors.bgSecondary};
+    background-color: ${({theme}) => theme.colors.bgSecondary};
   }
 `
 export const Avatar = styled.img<StyledProps>`
@@ -43,14 +43,14 @@ export const Name = styled.span<StyledProps>`
   font-weight: ${props => props.variant === 'detail' ? typography.fontWeight.bold : typography.fontWeight.semibold};
   font-size: ${props => props.variant === 'detail' ? typography.fontSize.xxxl : typography.fontSize.lg}px;
   line-height: ${props => props.variant === 'detail' ? typography.lineHeight.xxl : typography.lineHeight.lg};
-  color: ${colors.textPrimary};
+  color: ${({theme}) => theme.colors.textPrimary};
 `
 export const UserTag = styled.span<StyledProps>`
   font-family: ${typography.fontFamily.primary};
   font-weight: ${typography.fontWeight.regular};
   font-size: ${props => props.variant === 'detail' ? typography.fontSize.xl : typography.fontSize.sm}px;
   line-height: ${props => props.variant === 'detail' ? typography.lineHeight.lg : typography.lineHeight.sm};
-  color: ${colors.textTertiary};
+  color: ${({theme}) => theme.colors.textTertiary};
 `
 
 export const Position = styled.div<StyledProps>`
@@ -59,7 +59,7 @@ export const Position = styled.div<StyledProps>`
   text-align: ${props => props.variant === 'detail' ? "center" : "start"};
   font-size: ${typography.fontSize.xs}px;
   line-height: ${typography.lineHeight.xs};
-  color: ${colors.textSecondary};
+  color: ${({theme}) => theme.colors.textSecondary};
 `
 
 export const BirthdayContainer = styled.div`
@@ -67,7 +67,7 @@ export const BirthdayContainer = styled.div`
   font-weight: ${typography.fontWeight.regular};
   font-size: ${typography.fontSize.sm}px;
   line-height: ${typography.lineHeight.sm};
-  color: ${colors.textSecondary};
+  color: ${({theme}) => theme.colors.textSecondary};
   min-width: 70px;
   text-align: right;
 `

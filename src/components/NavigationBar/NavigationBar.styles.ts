@@ -163,11 +163,15 @@ export const SortButton = styled.button`
 export const TabsContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  gap: 24px;
   padding-bottom: 0px;
   
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  button {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 `
 
@@ -192,3 +196,4 @@ export const Tab = styled.button<TabProps>`
     color: ${colors.textPrimary};
   }
 `
+

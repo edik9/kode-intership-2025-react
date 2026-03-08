@@ -20,7 +20,6 @@ export const SkeletonWrapper = styled.div`
   align-items: center;
   gap: 12px;
   animation: ${pulse} 1.5s ease-in-out infinite;
-  margin-top: 106px;
 `
 export const SkeletonAvatar = styled.div`
   width: 72px;

@@ -9,6 +9,8 @@ interface UserListProps {
   searchQuery: string
   getDepartmentName: (dept: string) => string
   groupUsersByYear: (users: User[]) => { year: number; users: User[] }[]
+  isOffline?: boolean      
+  isReconnecting?: boolean
 }
 
 export const UserList: React.FC<UserListProps> = ({
@@ -16,7 +18,9 @@ export const UserList: React.FC<UserListProps> = ({
   sortType,
   searchQuery,
   getDepartmentName,
-  groupUsersByYear
+  groupUsersByYear,
+  isOffline,
+  isReconnecting
 }) => {
   if (users.length === 0) {
     return (
@@ -40,6 +44,8 @@ export const UserList: React.FC<UserListProps> = ({
             user={user}
             getDepartmentName={getDepartmentName}
             variant="list"
+            isOffline={isOffline}
+            isReconnecting={isReconnecting}
           />
         ))
       ) : (
@@ -54,6 +60,8 @@ export const UserList: React.FC<UserListProps> = ({
                   getDepartmentName={getDepartmentName}
                   showBirthday={true}
                   variant="list"
+                  isOffline={isOffline}
+                  isReconnecting={isReconnecting}
                 />
               ))}
             </div>

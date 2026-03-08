@@ -9,12 +9,17 @@ interface UserCardProps {
   getDepartmentName: (dept: string) => string
   showBirthday?: boolean
   variant?: "list" | "detail"
+  isOffline?: boolean          
+  isReconnecting?: boolean
 }
 
-const UserCard: React.FC<UserCardProps> = ({user, showBirthday, variant = "list"}) => {
+const UserCard: React.FC<UserCardProps> = ({user, showBirthday, variant = "list", isOffline, isReconnecting}) => {
   const navigate = useNavigate()
 
+  const isDisabled = isOffline || isReconnecting;
+
   const handleClick = () => {
+    if (isDisabled) return;
     if (variant === 'list') {  
       navigate(`/user/${user.id}`)
     }

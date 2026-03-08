@@ -8,6 +8,7 @@ import { NavigationBar } from '../../components/NavigationBar/NavigationBar'
 import { UserList } from '../../components/UserList/UserList'
 import { SortModal } from '../../components/SortModal/SortModal'
 import { SkeletonList } from '../../components/UI/Skeleton/Skeleton'
+import { useNetworkStatus } from '../../hooks/useNetworkStatus.ts'
 
 type SortType = "alphabet" | "birthday"
 
@@ -19,12 +20,23 @@ const MainPage = () => {
   
   const [selectedDepartment, setSelectedDepartment] = useState<Department>("all")
   const [searchQuery, setSearchQuery] = useState("")
-  const debouncedSearch = useDebounce(searchQuery, 500)
   const [sortType, setSortType] = useState<SortType>("alphabet")
+  const debouncedSearch = useDebounce(searchQuery, 500)
 
   const [isSortModalOpen, setIsSortModalOpen] = useState(false)
+  const isOffline = useNetworkStatus()
+  const [isReconnecting, setIsReconnecting] = useState(false);
 
-    const tabs: { value: Department; label: string }[] = [
+  useEffect(() => {
+    if (!isOffline) {
+      setIsReconnecting(true);
+      loadUsers(selectedDepartment).finally(() => {
+        setIsReconnecting(false);
+      });
+    }
+  }, [isOffline]);
+
+  const tabs: { value: Department; label: string }[] = [
     { value: 'all', label: 'Все' },
     { value: 'android', label: 'Android' },
     { value: 'ios', label: 'iOS' },
@@ -174,6 +186,8 @@ const MainPage = () => {
           onDepartmentChange={handleDepartmentChange}
           onSortClick={() => setIsSortModalOpen(true)}
           tabs={tabs}
+          isOffline={isOffline}
+          isReconnecting={isReconnecting}
         />
         <div style={{ height: 'calc(100vh - 106px)' }}>
         <ErrorScreen onRetry={handleRetry}/>
@@ -192,6 +206,8 @@ const MainPage = () => {
         onDepartmentChange={handleDepartmentChange}
         onSortClick={() => setIsSortModalOpen(true)}
         tabs={tabs}
+        isOffline={isOffline}
+        isReconnecting={isReconnecting}
       />
 
       {loading ? (
@@ -203,6 +219,8 @@ const MainPage = () => {
           searchQuery={searchQuery}
           getDepartmentName={getDepartmentName}
           groupUsersByYear={groupUsersByYear}
+          isOffline={isOffline}     
+          isReconnecting={isReconnecting} 
         />
       )}
 

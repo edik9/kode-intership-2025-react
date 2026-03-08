@@ -1,12 +1,14 @@
 import React from 'react';
 import * as Styles from './ReconnectedBanner.style';
+import { useTranslation } from 'react-i18next';
 
 const OfflineBanner: React.FC = () => {
+  const {t} = useTranslation()
   return (
     <Styles.Container>
-      <Styles.Label>Поиск</Styles.Label>
+      <Styles.Label>{t('search')}</Styles.Label>
       <Styles.Text>
-        Секундочку, гружусь...
+        {t('reconnecting')}
       </Styles.Text>
     </Styles.Container>
   );

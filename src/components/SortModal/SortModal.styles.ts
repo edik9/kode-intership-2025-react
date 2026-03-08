@@ -1,8 +1,69 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { breakpoints, typography } from "../../styles/variables";
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+`
 
-export const Overlay = styled.div`
+const fadeInOverlay = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const slideUp = keyframes`
+  from {
+    transform: translateX(-50%) translateY(100%);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+`;
+
+const fadeOutOverlay = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const slideDown = keyframes`
+  from {
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    transform: translateX(-50%) translateY(100%);
+  }
+`;
+
+interface ModalProps {
+  $isClosing?: boolean;
+}
+
+export const Overlay = styled.div<ModalProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,13 +74,14 @@ export const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: ${props => props.$isClosing ? fadeOutOverlay : fadeInOverlay} 0.2s ease;
 
   @media (max-width: ${breakpoints.mobile}) {
     align-items: flex-end;  
   }
 `
 
-export const Modal = styled.div`
+export const Modal = styled.div<ModalProps>`
   width: 375px;
   height: 192px;
   background-color: ${({theme}) => theme.colors.bgPrimary};
@@ -27,8 +89,9 @@ export const Modal = styled.div`
   padding: 24px;
   position: relative;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: ${props => props.$isClosing ? fadeOut : fadeIn} 0.3s ease;
 
-  @media (max-width: 430px) {
+  @media (max-width: 440px) {
     width: 359px;
     height: auto;
     min-height: 214px;        
@@ -41,7 +104,7 @@ export const Modal = styled.div`
     border-radius: 20px 20px 0 0;
     margin: 0;
     overflow-y: auto;
-    transition: max-height 0.3s ease; 
+    animation: ${props => props.$isClosing ? slideDown : slideUp} 0.3s ease-out;
   }
 `
 

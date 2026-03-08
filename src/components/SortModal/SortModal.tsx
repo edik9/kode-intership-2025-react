@@ -1,6 +1,7 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { CloseIcon } from "../../assets/icons"
 import * as Styles from "./SortModal.styles"
+import { useTranslation } from "react-i18next"
 
 interface SortMobileProps {
   onClose: () => void
@@ -13,6 +14,8 @@ export const SortModal: React.FC<SortMobileProps> = ({
   onSortChange,
   currentSort
 }) => {
+  const {t} = useTranslation()
+  const [isClosing, setIsClosing] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -21,18 +24,32 @@ export const SortModal: React.FC<SortMobileProps> = ({
     }
   }, [])
 
+  
+  const handleClose = () => {
+    setIsClosing(true)
+    setTimeout(()=>{
+      onClose()
+    }, 100)
+  }
+  
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      onClose()
+      handleClose()
     }
   }
 
+  const handleSortChangeWithAnimation = (type: 'alphabet' | 'birthday') => {
+    setIsClosing(true)
+    setTimeout(() => {
+      onSortChange(type) 
+    }, 100) 
+  }
   return (
-    <Styles.Overlay onClick={handleOverlayClick}>
-      <Styles.Modal onClick={(e) => e.stopPropagation()}>
+    <Styles.Overlay onClick={handleOverlayClick} $isClosing={isClosing}>
+      <Styles.Modal onClick={(e) => e.stopPropagation()} $isClosing={isClosing}>
         <Styles.DragHandle />
-        <Styles.Title>Сортировка</Styles.Title>
-        <Styles.CloseButton onClick={onClose}>
+        <Styles.Title>{t('sortTitle')}</Styles.Title>
+        <Styles.CloseButton onClick={handleClose}>
           <CloseIcon />
         </Styles.CloseButton>
         <Styles.OptionsContainer>
@@ -42,10 +59,10 @@ export const SortModal: React.FC<SortMobileProps> = ({
               name="sort"
               value="alphabet"
               checked={currentSort === 'alphabet'}
-              onChange={() => onSortChange('alphabet')}
+              onChange={() => handleSortChangeWithAnimation('alphabet')}
             />
             <Styles.CustomRadio checked={currentSort === 'alphabet'} />
-            <Styles.OptionText>По алфавиту</Styles.OptionText>
+            <Styles.OptionText>{t('alphabet')}</Styles.OptionText>
           </Styles.Option>
           <Styles.Option>
             <Styles.RadioInput
@@ -53,10 +70,10 @@ export const SortModal: React.FC<SortMobileProps> = ({
               name="sort"
               value="alphabet"
               checked={currentSort === 'birthday'}
-              onChange={() => onSortChange('birthday')}
+              onChange={() => handleSortChangeWithAnimation('birthday')}
             />
             <Styles.CustomRadio checked={currentSort === 'birthday'}/>
-            <Styles.OptionText>По дню рождения</Styles.OptionText>
+            <Styles.OptionText>{t('birthday')}</Styles.OptionText>
           </Styles.Option>
         </Styles.OptionsContainer>
       </Styles.Modal>

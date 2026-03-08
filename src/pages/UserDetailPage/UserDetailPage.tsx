@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getUsers } from '../../api/users'
 import type { User } from '../../types/user'
-// import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar'
 import UserCard from '../../components/UserCard/UserCard'
 import * as Styles from './UserDetailPage.styles'
 import { SkeletonList } from '../../components/UI/Skeleton/Skeleton'
 import { PhoneIcon, StarIcon } from '../../assets/icons'
+import i18n from '../../i18n'
+import { useTranslation } from 'react-i18next'
 
 const formatBirthday = (dateString: string): string => {
   const date = new Date(dateString)
   
   const day = date.getDate()
-  const month = date.toLocaleDateString('ru-RU', { month: 'long' })
+  const month = date.toLocaleDateString(i18n.language === 'ru' ? 'ru-RU' : 'en-US', { month: 'long' })
   const year = date.getFullYear()
   
   return `${day} ${month} ${year}`
@@ -49,6 +50,7 @@ const UserDetailPage: React.FC<UserDetailPageProps> = ({getDepartmentName = (dep
   const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const {t} = useTranslation()
 
 useEffect(() => {
   const loadUser = async () => {
@@ -102,7 +104,7 @@ return(
                 </Styles.Icon>
                   <Styles.InfoContent>
                     <Styles.InfoText>{formatBirthday(user.birthday)}</Styles.InfoText>
-                    <Styles.AgeText>{calculateAge(user.birthday)} лет</Styles.AgeText>
+                    <Styles.AgeText>{t('age', { count: calculateAge(user.birthday) })}</Styles.AgeText>
                   </Styles.InfoContent>
               </Styles.InfoRow>
               <Styles.InfoRow>

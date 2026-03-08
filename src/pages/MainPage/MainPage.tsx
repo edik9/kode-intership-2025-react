@@ -10,6 +10,7 @@ import { SortModal } from '../../components/SortModal/SortModal'
 import { SkeletonList } from '../../components/UI/Skeleton/Skeleton'
 import { useNetworkStatus } from '../../hooks/useNetworkStatus.ts'
 import useLocalStorageState from 'use-local-storage-state'
+import { useTranslation } from 'react-i18next'
 
 type SortType = "alphabet" | "birthday"
 
@@ -37,6 +38,8 @@ const MainPage = () => {
   const isOffline = useNetworkStatus()
   const [isReconnecting, setIsReconnecting] = useState(false);
 
+  const {t} = useTranslation()
+
   useEffect(() => {
     if (!isOffline) {
       setIsReconnecting(true);
@@ -47,19 +50,19 @@ const MainPage = () => {
   }, [isOffline]);
 
   const tabs: { value: Department; label: string }[] = [
-    { value: 'all', label: 'Все' },
-    { value: 'android', label: 'Android' },
-    { value: 'ios', label: 'iOS' },
-    { value: 'design', label: 'Дизайн' },
-    { value: 'management', label: 'Менеджмент' },
-    { value: 'qa', label: 'QA' },
-    { value: 'back_office', label: 'Бэк-офис' },
-    { value: 'frontend', label: 'Frontend' },
-    { value: 'hr', label: 'HR' },
-    { value: 'pr', label: 'PR' },
-    { value: 'backend', label: 'Backend' },
-    { value: 'support', label: 'Техподдержка' },
-    { value: 'analytics', label: 'Аналитика' },
+    { value: 'all', label: t('all') },
+    { value: 'android', label: t('android') },
+    { value: 'ios', label: t('ios') },
+    { value: 'design', label: t('design') },
+    { value: 'management', label: t('management') },
+    { value: 'qa', label: t('qa') },
+    { value: 'back_office', label: t('back_office') },
+    { value: 'frontend', label: t('frontend') },
+    { value: 'hr', label: t('hr') },
+    { value: 'pr', label: t('pr') },
+    { value: 'backend', label: t('backend') },
+    { value: 'support', label: t('support') },
+    { value: 'analytics', label: t('analytics') },
   ]
   
   const loadUsers = async (department: Department) => {

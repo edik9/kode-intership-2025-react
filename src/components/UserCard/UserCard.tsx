@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import type { User } from '../../types/user'
 import * as Styles from './UserCard.styles'
 import { GooseIcon } from '../../assets/icons'
+import i18n from '../../i18n'
 
 interface UserCardProps {
   user: User
@@ -28,7 +29,7 @@ const UserCard: React.FC<UserCardProps> = ({user, showBirthday, variant = "list"
   const formatBirthdayShort = (dateString: string) =>{
     const date = new Date(dateString)
     const day = date.getDate()
-    const month = date.toLocaleDateString('ru-RU', { month: 'long' })
+    const month = date.toLocaleDateString(i18n.language === 'ru' ? 'ru-RU' : 'en-US', { month: 'long' })
     return `${day} ${month.slice(0, 3)}`
   }
 

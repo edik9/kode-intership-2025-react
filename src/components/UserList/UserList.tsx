@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import type { User } from "../../types/user"
 import NotFound from "../NotFound/NotFound"
 import UserCard from "../UserCard/UserCard"
@@ -22,6 +23,8 @@ export const UserList: React.FC<UserListProps> = ({
   isOffline,
   isReconnecting
 }) => {
+  const { t } = useTranslation()
+
   if (users.length === 0) {
     return (
       <div style={{ 
@@ -30,7 +33,7 @@ export const UserList: React.FC<UserListProps> = ({
         color: '#97979B',
         fontSize: '16px', 
       }}>
-        {searchQuery ? <NotFound /> : "Нет пользователей"}
+        {searchQuery ? <NotFound /> : t('noUsers')}
       </div>
     )
   }

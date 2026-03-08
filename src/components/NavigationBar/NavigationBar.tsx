@@ -4,6 +4,8 @@ import type { Department } from "../../types/user"
 import OfflineBanner from "../OfflineBanner/OfflineBanner"
 import ReconnectedBanner from "../ReconnectedBanner/ReconnectedBanner"
 import * as Styles from './NavigationBar.styles'
+import LangSwitcher from "../LangSwitcher/LangSwitcher"
+import { useTranslation } from "react-i18next"
 
 interface NavigationBarProps {
   searchQuery?: string
@@ -31,6 +33,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   isReconnecting
 }) => {
   const {theme, toggleTheme} = useTheme()
+  const {t} = useTranslation()
   return (
     <>
       {isOffline ? (
@@ -83,11 +86,12 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
                 <Styles.SearchSection>
                   <Styles.OptButtons>
                     <Styles.SearchLabel>
-                      Поиск
+                      {t('search')}
                     </Styles.SearchLabel>
                     <Styles.ThemeToggle onClick={toggleTheme}>
                       {theme === 'light' ? '🌙' : '☀️'}
                     </Styles.ThemeToggle>
+                    <LangSwitcher />
                   </Styles.OptButtons>
                   <Styles.SearchWrapper>
                     {/* ПОИСКОВАЯ СТРОКА */}
@@ -97,7 +101,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
                       </Styles.SearchIcon>
                       <Styles.SearchInput 
                         type="text" 
-                        placeholder="Введи имя, тег, почту..."
+                        placeholder={t('searchPlaceholder')}
                         value={searchQuery}
                         onChange={onSearchChange}
                       />

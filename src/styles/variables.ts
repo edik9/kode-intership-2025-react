@@ -1,6 +1,6 @@
 // точки перехода для адаптива
 export const breakpoints = {
-  mobile: 430,
+  mobile: 440,
   tablet: 768,
   desktop: 1024
 } as const

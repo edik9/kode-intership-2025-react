@@ -4,7 +4,7 @@ import { media } from "../../../styles/variables";
 export const Container = styled.div`
   width: 100%;
   min-width: 320px;
-  max-width: 375px; 
+  max-width: 430px; 
   margin: 0 auto;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
